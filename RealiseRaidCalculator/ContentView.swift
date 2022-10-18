@@ -8,12 +8,94 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedRaids: String = ""
+    @State private var raidLevels: [String] = [
+        "RAID 0",
+        "RAID 1",
+        "RAID 5",
+        "RAID 6",
+        "RAID 10",
+        "RAID 50",
+        "RAID 60"
+    ]
+    
+    @State private var selectedSizeValue: String = ""
+    private let sizeValue: [String] = [
+    "GB",
+    "TB"
+    ]
+    
+    @State private var sizeDisk: String = ""
+    @State private var diskCount: String = ""
+    @State private var parytyRaid: String = ""
+    
+    let formatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            return formatter
+        }()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("RAID Calculator")
+            HStack{
+                Text("RAID levels:")
+                Spacer()
+                Picker("RAID levels",
+                       selection: $selectedRaids) {
+                    ForEach(raidLevels, id: \.self) { raid in
+                        Text(raid)
+                    }
+                }
+            }
+            HStack{
+                Text("Single disk size:")
+                //min: 1, max: 20000
+                TextField("Size", text: $sizeDisk)
+                    .keyboardType(.decimalPad)
+                Picker("Size Value", selection: $selectedSizeValue){
+                    ForEach(sizeValue, id: \.self){ value in
+                        Text(value)
+                    }
+                }
+            }
+            HStack{
+                Text("Number of disks:")
+                TextField("Disks", text: $diskCount)
+                    .keyboardType(.decimalPad)
+            }
+            HStack{
+                Text("Parity RAIDs count:")
+                TextField("Count", text: $parytyRaid)
+                    .keyboardType(.decimalPad)
+            }
+            Group{
+                HStack{
+                    Text("Raw storage:")
+                    Spacer()
+                }
+                HStack{
+                    Text("Usable Storage:")
+                    Spacer()
+                }
+                HStack{
+                    Text("Speed gain:")
+                    Spacer()
+                }
+                HStack{
+                    Text("Speed gain:")
+                    Spacer()
+                }
+                HStack{
+                    Text("Fault tolerance:")
+                    Spacer()
+                }
+            }
+            Button("CALCULATE") {
+                
+            }
+            Spacer()
         }
         .padding()
     }
