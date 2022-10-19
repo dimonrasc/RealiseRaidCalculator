@@ -30,6 +30,8 @@ struct ContentView: View {
     @State private var diskCount: String = ""
     @State private var parytyRaid: String = ""
     
+    @State private var isParityRaidHiden = false
+    
     let formatter: NumberFormatter = {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -48,6 +50,14 @@ struct ContentView: View {
                         Text(raid)
                     }
                 }
+                       .onChange(of: selectedRaids, perform: { levels in
+                           if levels == "RAID 50"  || levels == "RAID 60"{
+                               isParityRaidHiden = true
+                           }
+                           else if levels != "RAID 50"  || levels != "RAID 60"{
+                               isParityRaidHiden = false
+                           }
+                       })
             }
             HStack{
                 Text("Single disk size:")
@@ -65,10 +75,12 @@ struct ContentView: View {
                 TextField("Disks", text: $diskCount)
                     .keyboardType(.decimalPad)
             }
-            HStack{
-                Text("Parity RAIDs count:")
-                TextField("Count", text: $parytyRaid)
-                    .keyboardType(.decimalPad)
+            if isParityRaidHiden{
+                HStack{
+                    Text("Parity RAIDs count:")
+                    TextField("Count", text: $parytyRaid)
+                        .keyboardType(.decimalPad)
+                }
             }
             Group{
                 HStack{
