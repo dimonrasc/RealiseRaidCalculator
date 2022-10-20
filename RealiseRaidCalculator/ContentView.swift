@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var selectedRaids: String = ""
+    @State private var selectedRaids: String = "RAID 0"
     @State private var raidLevels: [String] = [
         "RAID 0",
         "RAID 1",
@@ -20,17 +20,20 @@ struct ContentView: View {
         "RAID 60"
     ]
     
-    @State private var selectedSizeValue: String = ""
+    @State private var selectedSizeValue: String = "TB"
     private let sizeValue: [String] = [
     "GB",
     "TB"
     ]
     
-    @State private var sizeDisk: String = ""
-    @State private var diskCount: String = ""
-    @State private var parytyRaid: String = ""
+    @State private var sizeDisk: Int = 0
+    @State private var diskCount: Int = 0
+    @State private var parytyRaid: Int = 0
     
     @State private var isParityRaidHiden = false
+    
+    @State private var resultRaaidCalculator: String = ""
+    @State private var raidCalculate = RaidCalculate(raidValue: "RAID 5", sizeValue: 1, qtyValue: 4, qtyMainValue: 1, sizeType: "TB")
     
     let formatter: NumberFormatter = {
             let formatter = NumberFormatter()
@@ -62,7 +65,7 @@ struct ContentView: View {
             HStack{
                 Text("Single disk size:")
                 //min: 1, max: 20000
-                TextField("Size", text: $sizeDisk)
+                TextField("Size", value: $sizeDisk, formatter: NumberFormatter())
                     .keyboardType(.decimalPad)
                 Picker("Size Value", selection: $selectedSizeValue){
                     ForEach(sizeValue, id: \.self){ value in
@@ -72,41 +75,20 @@ struct ContentView: View {
             }
             HStack{
                 Text("Number of disks:")
-                TextField("Disks", text: $diskCount)
+                TextField("Disks", value: $diskCount, formatter: NumberFormatter())
                     .keyboardType(.decimalPad)
             }
             if isParityRaidHiden{
                 HStack{
                     Text("Parity RAIDs count:")
-                    TextField("Count", text: $parytyRaid)
+                    TextField("Count", value: $parytyRaid, formatter: NumberFormatter())
                         .keyboardType(.decimalPad)
                 }
             }
-            Group{
-                HStack{
-                    Text("Raw storage:")
-                    Spacer()
-                }
-                HStack{
-                    Text("Usable Storage:")
-                    Spacer()
-                }
-                HStack{
-                    Text("Speed gain:")
-                    Spacer()
-                }
-                HStack{
-                    Text("Speed gain:")
-                    Spacer()
-                }
-                HStack{
-                    Text("Fault tolerance:")
-                    Spacer()
-                }
-            }
             Button("CALCULATE") {
-                
+                resultRaaidCalculator = RaidCalculate(raidValue: selectedRaids, sizeValue: sizeDisk, qtyValue: diskCount, qtyMainValue: parytyRaid, sizeType: selectedSizeValue)
             }
+            Text(resultRaaidCalculator)
             Spacer()
         }
         .padding()

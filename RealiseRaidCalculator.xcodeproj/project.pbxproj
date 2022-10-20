@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9195C1C6290130D900292DC5 /* RaidCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9195C1C5290130D900292DC5 /* RaidCalculator.swift */; };
 		91EDCFFE28FF11FC00EB1454 /* RealiseRaidCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDCFFD28FF11FC00EB1454 /* RealiseRaidCalculatorApp.swift */; };
 		91EDD00028FF11FC00EB1454 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDCFFF28FF11FC00EB1454 /* ContentView.swift */; };
 		91EDD00228FF11FD00EB1454 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91EDD00128FF11FD00EB1454 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9195C1C5290130D900292DC5 /* RaidCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidCalculator.swift; sourceTree = "<group>"; };
 		91EDCFFA28FF11FC00EB1454 /* RealiseRaidCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealiseRaidCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91EDCFFD28FF11FC00EB1454 /* RealiseRaidCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealiseRaidCalculatorApp.swift; sourceTree = "<group>"; };
 		91EDCFFF28FF11FC00EB1454 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				91EDCFFD28FF11FC00EB1454 /* RealiseRaidCalculatorApp.swift */,
 				91EDCFFF28FF11FC00EB1454 /* ContentView.swift */,
+				9195C1C5290130D900292DC5 /* RaidCalculator.swift */,
 				91EDD00128FF11FD00EB1454 /* Assets.xcassets */,
 				91EDD00328FF11FD00EB1454 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9195C1C6290130D900292DC5 /* RaidCalculator.swift in Sources */,
 				91EDD00028FF11FC00EB1454 /* ContentView.swift in Sources */,
 				91EDCFFE28FF11FC00EB1454 /* RealiseRaidCalculatorApp.swift in Sources */,
 			);
