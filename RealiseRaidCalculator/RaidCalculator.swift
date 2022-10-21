@@ -109,34 +109,37 @@ import Foundation
 
         else if (raidValue == "RAID 50"){
             if(qtyValue >= qtyMainValue * 3){
-                if ((qtyValue > 5) && (qtyValue % 2 == 0) && (qtyValue % qtyMainValue == 0)){
-                    x = sizeValue * (qtyValue - 2)
-                    xRaw = sizeValue * qtyValue
-                    if (sizeType == "TB"){
-                        sizeValTB = x
-                        sizeValGB = x * 1000
-                        sizeValRawTB = xRaw
-                        sizeValRawGB = xRaw * 1000
+                if (qtyMainValue >= 1){
+                    if ((qtyValue > 5) && (qtyValue % 2 == 0) && (qtyValue % qtyMainValue == 0)){
+                        x = sizeValue * (qtyValue - 2)
+                        xRaw = sizeValue * qtyValue
+                        if (sizeType == "TB"){
+                            sizeValTB = x
+                            sizeValGB = x * 1000
+                            sizeValRawTB = xRaw
+                            sizeValRawGB = xRaw * 1000
+                        }
+                        else{
+                            sizeValGB = x
+                            sizeValTB = x / 1000
+                            sizeValRawGB = xRaw
+                            sizeValRawTB = xRaw / 1000
+                        }
+                        usableGB = Int(((floor(Double(sizeValGB) * 0.9313 * 100)) / 100))
+                        usableTB = Int(((floor((Double(sizeValGB) * 0.9095) / 10)) / 100))
+                        
+                        return "\(raidValue)\nRaw storage: \(sizeValRawTB)TB/ \(sizeValRawGB)GB\nUsable storage: \(usableTB)TB/ \(usableGB)GB\nSpeed gain: \(qtyValue - qtyMainValue)x read speed\nFault tolerance: At least drive failure. One disk from each RAID5 set can fail without data loss"
                     }
                     else{
-                        sizeValGB = x
-                        sizeValTB = x / 1000
-                        sizeValRawGB = xRaw
-                        sizeValRawTB = xRaw / 1000
+                        return "Minimum of 6 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID5 sets"
                     }
-                    usableGB = Int(((floor(Double(sizeValGB) * 0.9313 * 100)) / 100))
-                    usableTB = Int(((floor((Double(sizeValGB) * 0.9095) / 10)) / 100))
-                    
-                    return "\(raidValue)\nRaw storage: \(sizeValRawTB)TB/ \(sizeValRawGB)GB\nUsable storage: \(usableTB)TB/ \(usableGB)GB\nSpeed gain: \(qtyValue - qtyMainValue)x read speed\nFault tolerance: At least drive failure. One disk from each RAID5 set can fail without data loss"
-                }
-                else{
-                    return "Minimum of 6 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID5 sets"
+                }else{
+                    return "For \(qtyValue) disks you can have maximum \(qtyValue / 3) parity groups"
                 }
             }
             else{
-                return "Minimum of 6 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID5 sets"
+                return "For \(qtyValue) disks you can have maximum \(qtyValue / 3) parity groups"
             }
-            return "Minimum of 6 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID5 sets"
         }
 
         else if (raidValue == "RAID 6"){
@@ -168,34 +171,35 @@ import Foundation
 
         else if (raidValue == "RAID 60"){
             if(qtyValue >= qtyMainValue * 4){
-                if ((qtyValue > 7) && (qtyValue % 2 == 0) && (qtyValue % qtyMainValue == 0)){
-                    x = sizeValue * (qtyValue - 4)
-                    xRaw = sizeValue * qtyValue
-                    if (sizeType == "TB"){
-                        sizeValTB = x
-                        sizeValGB = x * 1000
-                        sizeValRawTB = xRaw
-                        sizeValRawGB = xRaw * 1000
+                if (qtyMainValue >= 1){
+                    if ((qtyValue > 7) && (qtyValue % 2 == 0) && (qtyValue % qtyMainValue == 0)){
+                        x = sizeValue * (qtyValue - 4)
+                        xRaw = sizeValue * qtyValue
+                        if (sizeType == "TB"){
+                            sizeValTB = x
+                            sizeValGB = x * 1000
+                            sizeValRawTB = xRaw
+                            sizeValRawGB = xRaw * 1000
+                        }
+                        else{
+                            sizeValGB = x
+                            sizeValTB = x / 1000
+                            sizeValRawGB = xRaw
+                            sizeValRawTB = xRaw / 1000
+                        }
+                        usableGB = Int(((floor(Double(sizeValGB) * 0.9313 * 100)) / 100))
+                        usableTB = Int(((floor((Double(sizeValGB) * 0.9095) / 10)) / 100))
+                        
+                        return "\(raidValue)\nRaw storage: \(sizeValRawTB)TB/ \(sizeValRawGB)GB\nUsable storage: \(usableTB)TB/ \(usableGB)GB\nSpeed gain: \(qtyValue - (qtyMainValue * 2))x read speed\nFault tolerance: At least two drive failure. Two disk from each RAID6 set can fail without data loss"
+                    }else{
+                        return "Minimum of 8 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID6 sets"
                     }
-                    else{
-                        sizeValGB = x
-                        sizeValTB = x / 1000
-                        sizeValRawGB = xRaw
-                        sizeValRawTB = xRaw / 1000
-                    }
-                    usableGB = Int(((floor(Double(sizeValGB) * 0.9313 * 100)) / 100))
-                    usableTB = Int(((floor((Double(sizeValGB) * 0.9095) / 10)) / 100))
-                    
-                    return "\(raidValue)\nRaw storage: \(sizeValRawTB)TB/ \(sizeValRawGB)GB\nUsable storage: \(usableTB)TB/ \(usableGB)GB\nSpeed gain: \(qtyValue - (qtyMainValue * 2))x read speed\nFault tolerance: At least two drive failure. Two disk from each RAID6 set can fail without data loss"
+                }else{
+                    return "For \(qtyValue) disks you can have maximum \(qtyValue / 4) parity groups"
                 }
-                else{
-                    return "Minimum of 8 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID6 sets"
-                }
+            }else{
+                return "For \(qtyValue) disks you can have maximum \(qtyValue / 4) parity groups"
             }
-            else{
-                return "Minimum of 8 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID6 sets"
-            }
-            return "Minimum of 8 disks are required and the quantity of disks must be even. The total number of disks should be divived equally between the RAID6 sets"
         }
         return "Error: You must selected"
     }

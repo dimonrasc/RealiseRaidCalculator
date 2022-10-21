@@ -67,6 +67,11 @@ struct ContentView: View {
                 //min: 1, max: 20000
                 TextField("Size", value: $sizeDisk, formatter: NumberFormatter())
                     .keyboardType(.decimalPad)
+                    .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+                                    if let textField = obj.object as? UITextField {
+                                        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                                    }
+                                }
                 Picker("Size Value", selection: $selectedSizeValue){
                     ForEach(sizeValue, id: \.self){ value in
                         Text(value)
@@ -77,19 +82,34 @@ struct ContentView: View {
                 Text("Number of disks:")
                 TextField("Disks", value: $diskCount, formatter: NumberFormatter())
                     .keyboardType(.decimalPad)
+                    .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+                                    if let textField = obj.object as? UITextField {
+                                        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                                    }
+                                }
             }
             if isParityRaidHiden{
                 HStack{
                     Text("Parity RAIDs count:")
                     TextField("Count", value: $parytyRaid, formatter: NumberFormatter())
                         .keyboardType(.decimalPad)
+                        .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+                                        if let textField = obj.object as? UITextField {
+                                            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                                        }
+                                    }
                 }
             }
+            Spacer()
+            HStack{
+                Text(resultRaaidCalculator)
+                Spacer()
+            }
+            
+            Spacer()
             Button("CALCULATE") {
                 resultRaaidCalculator = RaidCalculate(raidValue: selectedRaids, sizeValue: sizeDisk, qtyValue: diskCount, qtyMainValue: parytyRaid, sizeType: selectedSizeValue)
             }
-            Text(resultRaaidCalculator)
-            Spacer()
         }
         .padding()
     }
